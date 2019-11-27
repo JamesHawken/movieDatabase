@@ -44,11 +44,23 @@ class MovieStore {
         getMovies(url: urlComponents!.url!, completionHandler: completionHandler)
     }
     
+    
     static func getActors(movieId:String ,url: URL, completionHandler: @escaping ([Movie]) -> Void) {
         var urlComponents = baseUrlComponents
+        urlComponents?.path.append("movie/")
         urlComponents?.path.append(movieId)
-        urlComponents?.path.append("/credits?api_key=")
+        urlComponents?.path.append("/credits")
         urlComponents?.queryItems = [apiKey]
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         print(urlComponents!)
     }
     
@@ -78,8 +90,9 @@ class MovieStore {
                     
                     let movieResponse = try jsonDecoder.decode(MovieResponse.self, from: data)
                     completionHandler(movieResponse.results)
-                    print(movieResponse.results[2].id)
-               //     getActors(movieId: <#T##String#>, url: <#T##URL#>, completionHandler: //)
+                    let id:Int = movieResponse.results[2].id
+                    
+                   getActors(movieId: String(id), url: url, completionHandler:completionHandler)
                 } catch {
                     completionHandler([Movie]())
                 }
