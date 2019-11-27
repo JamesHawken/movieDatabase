@@ -42,5 +42,14 @@ class MovieDetailViewController: UIViewController {
         MovieStore.getImage(posterPath: urlPath) { _, image in
             self.topImageView.image = image
         }
+        MovieStore.getActors(movieId: String(movie.id)) { (cast) in
+         print(cast[0].name)
+        }
+            
+        
+            
+            
+        }
+        
     }
-}
+

@@ -22,6 +22,7 @@ class MovieStore {
         let url = URL(string: baseURLString + posterPath)!
         
         URLSession.shared.dataTask(with: url) { data, _, _ in
+            
             var image: UIImage?
             
             if let data = data {
@@ -45,23 +46,37 @@ class MovieStore {
     }
     
     
-    static func getActors(movieId:String ,url: URL, completionHandler: @escaping ([Movie]) -> Void) {
+    static func getActors(movieId:String, completionHandler: @escaping (Array<Actor>) -> Void) {
         var urlComponents = baseUrlComponents
         urlComponents?.path.append("movie/")
         urlComponents?.path.append(movieId)
         urlComponents?.path.append("/credits")
         urlComponents?.queryItems = [apiKey]
+        print("heeeey")
+        print(urlComponents!.url!)
         
+         URLSession.shared.dataTask(with: urlComponents!.url!) { data, _, error in
+            if let data = data {
+                
+                do {
+              //      print(data)
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let actorResponse = try jsonDecoder.decode(ActorResponse.self, from: data)
+                //    print(actorResponse.cast)
+                   completionHandler(actorResponse.cast)
+                    
+                   // let id:Int = movieResponse.results[2].id
+                    
+                  //  getActors(movieId: String(id), url: url, //completionHandler:completionHandler)
+                } catch {
+                    print("erreur lors du getActor")
+                    //completionHandler(Movie)
+                }
+            }
+    
         
-        
-        
-        
-        
-        
-        
-        
-        
-        print(urlComponents!)
+        }.resume()
     }
     
     static func getMovies(url: URL, completionHandler: @escaping ([Movie]) -> Void) {
@@ -90,9 +105,9 @@ class MovieStore {
                     
                     let movieResponse = try jsonDecoder.decode(MovieResponse.self, from: data)
                     completionHandler(movieResponse.results)
-                    let id:Int = movieResponse.results[2].id
+                  
                     
-                   getActors(movieId: String(id), url: url, completionHandler:completionHandler)
+           
                 } catch {
                     completionHandler([Movie]())
                 }
@@ -114,3 +129,4 @@ class MovieStore {
         getMovies(url: urlComponents!.url!, completionHandler: completionHandler)
     }
 }
+

@@ -16,9 +16,8 @@ struct Movie {
     var backdropPath: String?
     var releaseDate: Date?
     var voteAverage: Double
-  //  var crew: Array<String>?
+    
 }
-
 struct MovieResponse {
     var results: [Movie]
 }
