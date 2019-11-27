@@ -9,12 +9,14 @@
 import Foundation
 
 struct Movie {
+    var id:Int
     var title: String
     var overview: String
     var posterPath: String?
     var backdropPath: String?
     var releaseDate: Date?
     var voteAverage: Double
+  //  var crew: Array<String>?
 }
 
 struct MovieResponse {

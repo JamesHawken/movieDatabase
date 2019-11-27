@@ -11,7 +11,7 @@ import UIKit
 
 class MovieStore {
     //Properties
-    static let apiKey = URLQueryItem(name: "api_key", value: "XXXXXXXXXXX")
+    static let apiKey = URLQueryItem(name: "api_key", value: "53ba643986598c56bd34d0b506ae3f5c")
     static let language = URLQueryItem(name: "language", value: "fr")
     static let baseUrlComponents = URLComponents(string: "https://api.themoviedb.org/3/")
     static var currentTask: URLSessionDataTask?
@@ -44,6 +44,14 @@ class MovieStore {
         getMovies(url: urlComponents!.url!, completionHandler: completionHandler)
     }
     
+    static func getActors(movieId:String ,url: URL, completionHandler: @escaping ([Movie]) -> Void) {
+        var urlComponents = baseUrlComponents
+        urlComponents?.path.append(movieId)
+        urlComponents?.path.append("/credits?api_key=")
+        urlComponents?.queryItems = [apiKey]
+        print(urlComponents!)
+    }
+    
     static func getMovies(url: URL, completionHandler: @escaping ([Movie]) -> Void) {
         currentTask?.cancel()
         currentTask = nil
@@ -70,6 +78,8 @@ class MovieStore {
                     
                     let movieResponse = try jsonDecoder.decode(MovieResponse.self, from: data)
                     completionHandler(movieResponse.results)
+                    print(movieResponse.results[2].id)
+               //     getActors(movieId: <#T##String#>, url: <#T##URL#>, completionHandler: //)
                 } catch {
                     completionHandler([Movie]())
                 }
