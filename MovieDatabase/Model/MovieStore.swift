@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class MovieStore {
+    //Properties
     static let apiKey = URLQueryItem(name: "api_key", value: "XXXXXXXXXXX")
     static let language = URLQueryItem(name: "language", value: "fr")
     static let baseUrlComponents = URLComponents(string: "https://api.themoviedb.org/3/")
