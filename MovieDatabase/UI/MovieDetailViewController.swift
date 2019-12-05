@@ -10,16 +10,14 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
     // MARK: - Variables
-    
+    var movieDetailsController: ViewController?
     var movie: Movie?
-    
+
     @IBOutlet var releaseDate: UILabel!
     @IBOutlet var averageRate: UILabel!
     @IBOutlet var topImageView: UIImageView!
     @IBOutlet var overview: UILabel!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var character: UILabel!
-    @IBOutlet weak var id: UILabel!
+  
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -48,9 +46,7 @@ class MovieDetailViewController: UIViewController {
          print(cast[0].name)
             DispatchQueue.main.async {
             for actor in cast {
-                self.name.text=actor.name
-                self.character.text=actor.character
-                self.id.text=String(actor.castId)
+              //  name.text = actor.name
             }
         }
             
@@ -59,5 +55,8 @@ class MovieDetailViewController: UIViewController {
             
         }
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        movieDetailsController = segue.destination as? ViewController
     }
 }

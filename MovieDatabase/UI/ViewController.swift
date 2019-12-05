@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
     // MARK: - Variables
     
     @IBOutlet var tableview: UITableView!
@@ -23,7 +24,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableview.dataSource = self
     }
     
