@@ -12,16 +12,26 @@ class MovieDetailViewController: UIViewController {
     // MARK: - Variables
     var movieDetailsController: ViewController?
     var movie: Movie?
+    var actor : Actor?
 
+    @IBOutlet var actorTableView: UITableView!
+    
     @IBOutlet var releaseDate: UILabel!
     @IBOutlet var averageRate: UILabel!
     @IBOutlet var topImageView: UIImageView!
     @IBOutlet var overview: UILabel!
   
     // MARK: - Lifecycle
+    var actors = [Actor]() {
+        didSet {
+            actorTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        actorTableView.dataSource = self
+
         
         guard let movie = movie else { return }
         
@@ -45,8 +55,9 @@ class MovieDetailViewController: UIViewController {
         MovieStore.getActors(movieId: String(movie.id)) { (cast) in
          print(cast[0].name)
             DispatchQueue.main.async {
+            
             for actor in cast {
-              //  name.text = actor.name
+              self.actors.append(actor)
             }
         }
             
@@ -58,5 +69,45 @@ class MovieDetailViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         movieDetailsController = segue.destination as? ViewController
+        super.prepare(for: segue, sender: sender)
+        
+        guard let cell = sender as? UITableViewCell,
+            let indexPath = actorTableView.indexPath(for: cell),
+            let movieDetailViewController = segue.destination as? MovieDetailViewController
+            else {
+                return
+        }
+        
+        let actor = actors[indexPath.row]
+        movieDetailViewController.actor = actor
     }
+    
+    
+}
+
+
+
+extension MovieDetailViewController: UITableViewDataSource {
+    // MARK: - UITableViewDatasource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return actors.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("we have entered")
+        //print(actors)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as! ActorTableViewCell
+        
+        let actor = actors[indexPath.row]
+        cell.name.text = actor.name
+        cell.character.text = actor.character
+        cell.id.text = String(actor.castId)
+       
+    
+        
+    
+        
+        return cell
+}
 }
