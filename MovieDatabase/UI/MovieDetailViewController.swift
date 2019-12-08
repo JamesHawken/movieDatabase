@@ -102,11 +102,8 @@ extension MovieDetailViewController: UITableViewDataSource {
         let actor = actors[indexPath.row]
         cell.name.text = actor.name
         cell.character.text = actor.character
-        cell.id.text = String(actor.castId)
-       
-    
         
-    
+       
         
         return cell
 }

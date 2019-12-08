@@ -14,7 +14,8 @@ import UIKit
 class ActorTableViewCell: UITableViewCell {
     // MARK: - Variables
     
-    @IBOutlet var name: UILabel!
-    @IBOutlet var id: UILabel!
-    @IBOutlet var character: UILabel!
+    @IBOutlet weak var name: UILabel!
+    
+ 
+    @IBOutlet weak var character: UILabel!
 }
