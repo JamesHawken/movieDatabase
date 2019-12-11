@@ -11,10 +11,12 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     // MARK: - Variables
     var movieDetailsController: ViewController?
+    
     var movie: Movie?
     var actor : Actor?
 
-    @IBOutlet var actorTableView: UITableView!
+  
+    @IBOutlet weak var actorCollectionView: UICollectionView!
     
     @IBOutlet var releaseDate: UILabel!
     @IBOutlet var averageRate: UILabel!
@@ -24,14 +26,13 @@ class MovieDetailViewController: UIViewController {
     // MARK: - Lifecycle
     var actors = [Actor]() {
         didSet {
-            actorTableView.reloadData()
+            actorCollectionView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        actorTableView.dataSource = self
-
+        actorCollectionView.dataSource = self
         
         guard let movie = movie else { return }
         
@@ -61,18 +62,17 @@ class MovieDetailViewController: UIViewController {
             }
         }
             
-        
-            
-            
         }
+     
+        //actorTableView.heightAnchor = 120
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         movieDetailsController = segue.destination as? ViewController
         super.prepare(for: segue, sender: sender)
         
-        guard let cell = sender as? UITableViewCell,
-            let indexPath = actorTableView.indexPath(for: cell),
+        guard let cell = sender as? UICollectionViewCell,
+            let indexPath = actorCollectionView.indexPath(for: cell),
             let movieDetailViewController = segue.destination as? MovieDetailViewController
             else {
                 return
@@ -87,24 +87,45 @@ class MovieDetailViewController: UIViewController {
 
 
 
-extension MovieDetailViewController: UITableViewDataSource {
-    // MARK: - UITableViewDatasource
+extension MovieDetailViewController: UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return actors.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("we have entered")
         //print(actors)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActorTableViewCell", for: indexPath) as! ActorTableViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! ActorCollectionViewCell
         
         let actor = actors[indexPath.row]
         cell.name.text = actor.name
-        cell.character.text = actor.character
-        
        
+    
+        
+        MovieStore.getImage(posterPath: actor.profilePath ?? "") { path, image in
+            if self.actors.count > indexPath.row {
+                let newActor = self.actors[indexPath.row]
+                if path == newActor.profilePath {
+                    cell.actorImage.image = image
+                } else {
+                    cell.actorImage.image = nil
+                }
+            }
+        }
+        
+        
         
         return cell
-}
+    }
+    
+    
+   
+    
+    // MARK: - UITableViewDatasource
+   
+    
+    
 }

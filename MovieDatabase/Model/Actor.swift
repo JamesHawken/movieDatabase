@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 struct Actor {
     var name:String
+    var profilePath: String?
     var character:String
     var castId:Int
 }

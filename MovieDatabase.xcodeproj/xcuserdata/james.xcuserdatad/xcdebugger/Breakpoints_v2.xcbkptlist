@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieDatabase/UI/ViewController.swift"
+            timestampString = "597512412.901005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieDatabase.ViewController.movies.modify : Swift.Array&lt;MovieDatabase.Movie&gt;"
+                  moduleName = "MovieDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/james/MovieDatabase/MovieDatabase/UI/ViewController.swift"
+                  timestampString = "597275912.239816"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieDatabase.ViewController.movies.modify : Swift.Array&lt;MovieDatabase.Movie&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MovieDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/james/MovieDatabase/MovieDatabase/UI/ViewController.swift"
+                  timestampString = "597275912.24421"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieDatabase.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MovieDatabase.ViewController"
+                  moduleName = "MovieDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/james/MovieDatabase/MovieDatabase/UI/ViewController.swift"
+                  timestampString = "597275912.246196"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "277">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieDatabase.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MovieDatabase.ViewController&gt;"
+                  moduleName = "MovieDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/james/MovieDatabase/MovieDatabase/UI/ViewController.swift"
+                  timestampString = "597275912.248444"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "176">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

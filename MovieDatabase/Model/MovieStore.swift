@@ -63,7 +63,7 @@ class MovieStore {
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     let actorResponse = try jsonDecoder.decode(ActorResponse.self, from: data)
-                //    print(actorResponse.cast)
+                    print(actorResponse.cast)
                    completionHandler(actorResponse.cast)
                     
                    // let id:Int = movieResponse.results[2].id
