@@ -18,6 +18,7 @@ class MovieDetailViewController: UIViewController {
   
     @IBOutlet weak var actorCollectionView: UICollectionView!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet var releaseDate: UILabel!
     @IBOutlet var averageRate: UILabel!
     @IBOutlet var topImageView: UIImageView!
@@ -25,6 +26,12 @@ class MovieDetailViewController: UIViewController {
   
     // MARK: - Lifecycle
     var actors = [Actor]() {
+        didSet {
+            actorCollectionView.reloadData()
+        }
+    }
+    
+    var moviePosters = [MoviePoster]() {
         didSet {
             actorCollectionView.reloadData()
         }
@@ -63,6 +70,31 @@ class MovieDetailViewController: UIViewController {
         }
             
         }
+        
+        
+        MovieStore.getMoviePosters(movieId: String(movie.id)) { (moviePosters) in
+           
+            guard let backgroundImage = moviePosters[0].filePath
+                else {
+                    return
+            }
+            
+          
+            
+            DispatchQueue.main.async {
+                print(moviePosters[0].filePath)
+                
+                MovieStore.getImage(posterPath: backgroundImage) { _, image in
+                    self.backgroundImage.image = image
+                }
+                for moviePoster in moviePosters {
+                    self.moviePosters.append(moviePoster)
+                }
+            }
+        }
+        
+            
+    
      
         //actorTableView.heightAnchor = 120
         
@@ -104,7 +136,7 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         cell.name.text = actor.name
        
     
-        
+      
         MovieStore.getImage(posterPath: actor.profilePath ?? "") { path, image in
             if self.actors.count > indexPath.row {
                 let newActor = self.actors[indexPath.row]

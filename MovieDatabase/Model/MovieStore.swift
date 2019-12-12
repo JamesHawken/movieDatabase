@@ -79,6 +79,41 @@ class MovieStore {
         }.resume()
     }
     
+    static func getMoviePosters(movieId:String, completionHandler: @escaping (Array<MoviePoster>) -> Void) {
+        var urlComponents = baseUrlComponents
+        urlComponents?.path.append("movie/")
+        urlComponents?.path.append(movieId)
+        urlComponents?.path.append("/images")
+        urlComponents?.queryItems = [apiKey]
+        print("This is the moviePosterUrl")
+        print(urlComponents!.url!)
+        
+        URLSession.shared.dataTask(with: urlComponents!.url!) { data, _, error in
+            if let data = data {
+                
+                do {
+                    //      print(data)
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let moviePosterResponse = try jsonDecoder.decode(MoviePosterResponse.self, from: data)
+                    print(moviePosterResponse.posters)
+                    completionHandler(moviePosterResponse.posters)
+                    
+                    // let id:Int = movieResponse.results[2].id
+                    
+                    //  getActors(movieId: String(id), url: url, //completionHandler:completionHandler)
+                } catch {
+                    print("erreur lors du getMoviePosters")
+                    //completionHandler(Movie)
+                }
+            }
+            
+            
+            }.resume()
+    }
+    
+    
+    
     static func getMovies(url: URL, completionHandler: @escaping ([Movie]) -> Void) {
         currentTask?.cancel()
         currentTask = nil
